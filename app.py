@@ -1,6 +1,6 @@
 import yfinance as yf
 from statsmodels.tsa.arima.model import ARIMA
-from flask import Flask, request, jsonify, render_template
+from flask import Flask, request, jsonify, render_template, url_for
 from datetime import datetime, timedelta
 
 app = Flask(__name__)
