@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Stock Prediction App</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+      }
+      form {
+        display: grid;
+        gap: 10px;
+      }
+      button {
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Stock Prediction App</h1>
+    <form id="predictionForm">
+      <label for="ticker">Stock Ticker:</label>
+      <input type="text" id="ticker" required />
+
+      <label for="startDate">Start Date:</label>
+      <input type="date" id="startDate" required />
+
+      <label for="endDate">End Date:</label>
+      <input type="date" id="endDate" required />
+
+      <label for="forecastDays">Forecast Days:</label>
+      <input type="number" id="forecastDays" required min="1" max="30" />
+
+      <label for="arimaParams">ARIMA Parameters (p,d,q):</label>
+      <input
+        type="text"
+        id="arimaParams"
+        required
+        pattern="\d+,\d+,\d+"
+        placeholder="e.g., 1,1,1"
+      />
+
+      <button type="submit">Predict</button>
+    </form>
+
+    <canvas id="predictionChart"></canvas>
+
+    <script>
+      let chart;
+
+      document
+        .getElementById("predictionForm")
+        .addEventListener("submit", async (e) => {
+          e.preventDefault();
+
+          const formData = {
+            ticker: document.getElementById("ticker").value,
+            start_date: document.getElementById("startDate").value,
+            end_date: document.getElementById("endDate").value,
+            forecast_days: document.getElementById("forecastDays").value,
+            arima_params: document.getElementById("arimaParams").value,
+          };
+
+          try {
+            const response = await fetch("/predict", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify(formData),
+            });
+
+            const data = await response.json();
+
+            // Destroy the existing chart if it exists
+            if (chart) {
+              chart.destroy();
+            }
+
+            // Create new chart
+            chart = new Chart(document.getElementById("predictionChart"), {
+              type: "line",
+              data: {
+                labels: [...data.historical_dates, ...data.forecast_dates],
+                datasets: [
+                  {
+                    label: "Historical Data",
+                    data: data.historical_data,
+                    borderColor: "rgb(75, 192, 192)",
+                    tension: 0.1,
+                    pointRadius: 0,
+                  },
+                  {
+                    label: "Forecast",
+                    data: [
+                      ...Array(data.historical_data.length).fill(null),
+                      ...data.forecast,
+                    ],
+                    borderColor: "rgb(255, 99, 132)",
+                    tension: 0.1,
+                    pointRadius: 0,
+                  },
+                ],
+              },
+              options: {
+                responsive: true,
+                plugins: {
+                  title: {
+                    display: true,
+                    text: `Stock Data and Forecast for ${formData.ticker}`,
+                  },
+                },
+              },
+            });
+          } catch (error) {
+            console.error("Error:", error);
+            alert("An error occurred. Please try again.");
+          }
+        });
+    </script>
+  </body>
+</html>
