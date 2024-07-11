@@ -1,1 +1,1 @@
-enesturk.com/stock-predictor-arima
+www.enesturk.com/stock-predictor-arima
