@@ -56,9 +56,17 @@ This project is a web application that allows users to forecast stock prices usi
 2. Specify the start and end dates for historical data
 3. Enter the number of days to forecast
 4. Input the ARIMA parameters (p, d, q)
-   ![Demo 1](https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExejF3NDJqYmd5a3owdHpmZTV0eG85ZnFkaHRpdHJyb2J6N3ZnbWI4ciZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/t3yFRWMGACwyxpRb7V/giphy.gif)
+<center>
+
+![Demo 1](https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExejF3NDJqYmd5a3owdHpmZTV0eG85ZnFkaHRpdHJyb2J6N3ZnbWI4ciZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/t3yFRWMGACwyxpRb7V/giphy.gif)
+
+</center>
 5. Click "Predict" to generate the forecast and view the chart
-   ![Demo 2](https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExM2wyMTZoZDhpM3ZzYmxhdXh5Nm1laWxma2xqYjliY21xY3R2eWVxbiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/ZgGQGb9zFADo8FYaZR/giphy.gif)
+<center>
+
+![Demo 2](https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExM2wyMTZoZDhpM3ZzYmxhdXh5Nm1laWxma2xqYjliY21xY3R2eWVxbiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/ZgGQGb9zFADo8FYaZR/giphy.gif)
+
+</center>
 
 ## Project Structure
 
